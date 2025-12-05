@@ -1,3 +1,9 @@
+// ==================== Configuración ====================
+const CONFIG = {
+    // Número de WhatsApp del negocio (formato: código de país + número sin espacios ni símbolos)
+    whatsappNumber: '5491112345678'
+};
+
 // ==================== Datos de Productos ====================
 // Productos de ejemplo con imágenes de Unsplash
 const defaultProducts = [
@@ -247,21 +253,14 @@ function sendWhatsAppMessage() {
     const product = productManager.getProductById(currentProductId);
     if (!product) return;
     
-    // Número de WhatsApp (cambiar por el número real del negocio)
-    const phoneNumber = '5491112345678'; // Formato: código de país + número sin espacios ni símbolos
-    
-    // Crear mensaje con detalles del producto
     const message = `¡Hola! Me interesa el siguiente producto:\n\n` +
         `*${product.name}*\n` +
         `Categoría: ${getCategoryLabel(product.category)}\n` +
         `Precio: $${product.price.toFixed(2)}\n\n` +
         `¿Podrían darme más información?`;
     
-    // Codificar el mensaje para URL
     const encodedMessage = encodeURIComponent(message);
-    
-    // Abrir WhatsApp
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
 }
 
