@@ -634,6 +634,20 @@ body {
     box-shadow: var(--shadow-md);
 }
 
+/* WhatsApp Button */
+.btn-whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-whatsapp:hover {
+    background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
 .btn-secondary {
     padding: 14px 28px;
     background: white;
