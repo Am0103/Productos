@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleHub - Moda & Calzado</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Fondo animado con partículas -->
+    <div class="particles"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Style<span class="highlight">Hub</span></h1>
+                <p class="tagline">Donde la moda cobra vida</p>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-filter="all">Todo</button>
+                <button class="nav-btn" data-filter="ropa">Ropa</button>
+                <button class="nav-btn" data-filter="calzado">Calzado</button>
+                <button class="nav-btn" data-filter="accesorios">Accesorios</button>
+            </nav>
+            <a href="admin.html" class="admin-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+                Admin
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2 class="hero-title">Colección <span class="gradient-text">Exclusiva</span></h2>
+            <p class="hero-subtitle">Descubre las últimas tendencias en moda y calzado</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" id="totalProducts">0</span>
+                    <span class="stat-label">Productos</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Calidad</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Atención</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar productos...">
+        <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+        </svg>
+    </div>
+
+    <!-- Grid de productos -->
+    <main class="container">
+        <div class="products-grid" id="productsGrid">
+            <!-- Los productos se cargarán dinámicamente -->
+        </div>
+    </main>
+
+    <!-- Modal de producto -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="modal-body">
+                <img src="" alt="" class="modal-image" id="modalImage">
+                <div class="modal-info">
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <p class="modal-category" id="modalCategory"></p>
+                    <p class="modal-description" id="modalDescription"></p>
+                    <div class="modal-price" id="modalPrice"></div>
+                    <button class="btn-primary modal-btn">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 StyleHub. Todos los derechos reservados.</p>
+            <p class="footer-text">Creado con ❤️ y estilo</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

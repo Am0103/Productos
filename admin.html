@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - StyleHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <!-- Login Screen -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>Style<span class="highlight">Hub</span></h1>
+                <p>Panel de Administración</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" class="form-control" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" class="form-control" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-primary btn-block">Iniciar Sesión</button>
+                <p class="login-hint">Usuario: admin / Contraseña: admin123</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-dashboard" id="adminDashboard" style="display: none;">
+        <!-- Botón hamburguesa para móvil -->
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Style<span class="highlight">Hub</span></h2>
+                <p class="admin-name">Administrador</p>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="sidebar-btn active" data-section="products">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    Productos
+                </button>
+                <button class="sidebar-btn" data-section="add">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Agregar Producto
+                </button>
+                <button class="sidebar-btn" id="logoutBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Cerrar Sesión
+                </button>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <h1 id="sectionTitle">Gestión de Productos</h1>
+                <a href="index.html" class="btn-secondary" target="_blank">Ver Catálogo</a>
+            </header>
+
+            <!-- Products Section -->
+            <section class="admin-section active" id="productsSection">
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <h3 id="totalProductsAdmin">0</h3>
+                        <p>Total Productos</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="ropaCount">0</h3>
+                        <p>Ropa</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="calzadoCount">0</h3>
+                        <p>Calzado</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="accesoriosCount">0</h3>
+                        <p>Accesorios</p>
+                    </div>
+                </div>
+
+                <div class="products-table-container">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <!-- Los productos se cargarán aquí -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Add Product Section -->
+            <section class="admin-section" id="addSection">
+                <div class="form-container">
+                    <form id="productForm" class="product-form">
+                        <input type="hidden" id="editId">
+                        
+                        <div class="form-group">
+                            <label for="productName">Nombre del Producto</label>
+                            <input type="text" id="productName" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productCategory">Categoría</label>
+                            <select id="productCategory" class="form-control" required>
+                                <option value="">Seleccionar categoría</option>
+                                <option value="ropa">Ropa</option>
+                                <option value="calzado">Calzado</option>
+                                <option value="accesorios">Accesorios</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productPrice">Precio ($)</label>
+                            <input type="number" id="productPrice" class="form-control" step="0.01" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productImage">URL de la Imagen</label>
+                            <input type="url" id="productImage" class="form-control" required>
+                            <small>Ingresa la URL de la imagen del producto</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productDescription">Descripción</label>
+                            <textarea id="productDescription" class="form-control" rows="4" required></textarea>
+                        </div>
+
+                        <div class="image-preview" id="imagePreview">
+                            <img src="" alt="Preview" id="previewImg" style="display: none;">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary" id="submitBtn">Agregar Producto</button>
+                            <button type="button" class="btn-secondary" id="cancelBtn">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
