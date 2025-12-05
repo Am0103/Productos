@@ -218,10 +218,13 @@ function getCategoryLabel(category) {
 }
 
 // ==================== Modal ====================
+let currentProductId = null;
+
 function openModal(id) {
     const product = productManager.getProductById(id);
     if (!product) return;
 
+    currentProductId = id;
     const modal = document.getElementById('productModal');
     document.getElementById('modalImage').src = product.image;
     document.getElementById('modalTitle').textContent = product.name;
@@ -234,6 +237,32 @@ function openModal(id) {
 
 function closeModal() {
     document.getElementById('productModal').classList.remove('active');
+    currentProductId = null;
+}
+
+// ==================== WhatsApp ====================
+function sendWhatsAppMessage() {
+    if (!currentProductId) return;
+    
+    const product = productManager.getProductById(currentProductId);
+    if (!product) return;
+    
+    // Número de WhatsApp (cambiar por el número real del negocio)
+    const phoneNumber = '5491112345678'; // Formato: código de país + número sin espacios ni símbolos
+    
+    // Crear mensaje con detalles del producto
+    const message = `¡Hola! Me interesa el siguiente producto:\n\n` +
+        `*${product.name}*\n` +
+        `Categoría: ${getCategoryLabel(product.category)}\n` +
+        `Precio: $${product.price.toFixed(2)}\n\n` +
+        `¿Podrían darme más información?`;
+    
+    // Codificar el mensaje para URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Abrir WhatsApp
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
 }
 
 // ==================== Filtros y Búsqueda ====================
@@ -265,8 +294,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Modal
     const modal = document.getElementById('productModal');
     const closeBtn = document.getElementById('closeModal');
+    const whatsappBtn = document.getElementById('whatsappBtn');
     
     closeBtn.addEventListener('click', closeModal);
+    
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', sendWhatsAppMessage);
+    }
     
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
