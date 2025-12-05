@@ -218,13 +218,10 @@ function getCategoryLabel(category) {
 }
 
 // ==================== Modal ====================
-let currentModalProductId = null;
-
 function openModal(id) {
     const product = productManager.getProductById(id);
     if (!product) return;
 
-    currentModalProductId = id;
     const modal = document.getElementById('productModal');
     document.getElementById('modalImage').src = product.image;
     document.getElementById('modalTitle').textContent = product.name;
@@ -233,36 +230,6 @@ function openModal(id) {
     document.getElementById('modalPrice').textContent = `$${product.price.toFixed(2)}`;
     
     modal.classList.add('active');
-}
-
-// ==================== WhatsApp ====================
-function openWhatsApp(productId) {
-    const product = productManager.getProductById(productId);
-    if (!product) return;
-
-    // Número de WhatsApp del negocio (formato: código de país + número, sin + ni espacios)
-    // Ejemplo: '5491123456789' para Argentina
-    const phoneNumber = '';
-    
-    // Crear mensaje con información del producto
-    const message = `¡Hola! Me interesa el siguiente producto:\n\n` +
-        `📦 *${product.name}*\n` +
-        `📂 Categoría: ${getCategoryLabel(product.category)}\n` +
-        `💰 Precio: $${product.price.toFixed(2)}\n\n` +
-        `${product.description}\n\n` +
-        `¿Podrían darme más información?`;
-    
-    // Codificar el mensaje para URL
-    const encodedMessage = encodeURIComponent(message);
-    
-    // Crear URL de WhatsApp
-    // Si hay número, abre conversación directa; si no, abre WhatsApp para seleccionar contacto
-    const whatsappUrl = phoneNumber 
-        ? `https://wa.me/${phoneNumber}?text=${encodedMessage}`
-        : `whatsapp://send?text=${encodedMessage}`;
-    
-    // Abrir en nueva pestaña
-    window.open(whatsappUrl, '_blank');
 }
 
 function closeModal() {
@@ -298,18 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Modal
     const modal = document.getElementById('productModal');
     const closeBtn = document.getElementById('closeModal');
-    const whatsappBtn = document.getElementById('modalWhatsappBtn');
     
     closeBtn.addEventListener('click', closeModal);
-    
-    // WhatsApp button
-    if (whatsappBtn) {
-        whatsappBtn.addEventListener('click', () => {
-            if (currentModalProductId) {
-                openWhatsApp(currentModalProductId);
-            }
-        });
-    }
     
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
