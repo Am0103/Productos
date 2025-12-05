@@ -32,8 +32,8 @@ Una página web moderna y creativa para catálogo de ropa, calzado y accesorios 
 ### Acceder al Panel de Administración
 1. Abre `admin.html` en tu navegador (o haz clic en "Admin" en el catálogo)
 2. Inicia sesión con:
-   - **Usuario**: `admin`
-   - **Contraseña**: `admin123`
+   - **Usuario**: `admi**`
+   - **Contraseña**: `admi****`
 3. Gestiona tus productos desde el panel
 
 ### Agregar/Editar Productos
