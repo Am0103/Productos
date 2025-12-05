@@ -525,6 +525,21 @@ body {
     padding: 18px 40px;
     font-size: 1.1rem;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    transition: all 0.3s ease;
+}
+
+.modal-btn:hover {
+    background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+}
+
+.modal-btn svg {
+    flex-shrink: 0;
 }
 
 /* ==================== Footer ==================== */

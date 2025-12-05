@@ -1,3 +1,8 @@
+// ==================== Configuración de WhatsApp ====================
+// IMPORTANTE: Cambia este número por tu número de WhatsApp (con código de país, sin +, sin espacios)
+// Ejemplo: 573001234567 para Colombia, 521234567890 para México, etc.
+const WHATSAPP_NUMBER = '573001234567'; // Cambia este número por el tuyo
+
 // ==================== Datos de Productos ====================
 // Productos de ejemplo con imágenes de Unsplash
 const defaultProducts = [
@@ -218,9 +223,13 @@ function getCategoryLabel(category) {
 }
 
 // ==================== Modal ====================
+let currentProduct = null; // Variable global para almacenar el producto actual
+
 function openModal(id) {
     const product = productManager.getProductById(id);
     if (!product) return;
+
+    currentProduct = product; // Guardar el producto actual
 
     const modal = document.getElementById('productModal');
     document.getElementById('modalImage').src = product.image;
@@ -234,6 +243,29 @@ function openModal(id) {
 
 function closeModal() {
     document.getElementById('productModal').classList.remove('active');
+    currentProduct = null;
+}
+
+// ==================== Función de WhatsApp ====================
+function sendWhatsApp() {
+    if (!currentProduct) return;
+
+    // Construir el mensaje
+    const message = `¡Hola! 👋 Estoy interesado en este producto:\n\n` +
+                   `📦 *${currentProduct.name}*\n` +
+                   `💰 Precio: $${currentProduct.price.toFixed(2)}\n` +
+                   `📂 Categoría: ${getCategoryLabel(currentProduct.category)}\n\n` +
+                   `${currentProduct.description}\n\n` +
+                   `¿Podrías darme más información?`;
+
+    // Codificar el mensaje para URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Crear la URL de WhatsApp
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+    
+    // Abrir WhatsApp en una nueva pestaña
+    window.open(whatsappUrl, '_blank');
 }
 
 // ==================== Filtros y Búsqueda ====================
